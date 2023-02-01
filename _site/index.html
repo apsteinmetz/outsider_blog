@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>outsider_blog</title>
+<title>Outsider Data - outsider_blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,6 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -121,7 +123,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -134,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">outsider_blog</span>
+    <span class="navbar-title">Outsider Data</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -191,7 +223,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="R" data-listing-date-sort="1511586000000" data-listing-file-modified-sort="1675202311756" data-listing-reading-time-sort="24.21">
+<div class="thumbnail">
+<p><a href="./posts/2017-11-25-summary-analysis-of-my-facebook-existence/2017-11-25-summary-analysis-of-my-facebook-existence.html"> <img src="./posts/2017-11-25-summary-analysis-of-my-facebook-existence/img/moods.gif" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2017-11-25-summary-analysis-of-my-facebook-existence/2017-11-25-summary-analysis-of-my-facebook-existence.html">
+<h3 class="no-anchor listing-title">
+Plumbing the Depths of My Soul (in Facebook)
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<img src="img/moods.gif" class="img-fluid">
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2017-11-25-summary-analysis-of-my-facebook-existence/2017-11-25-summary-analysis-of-my-facebook-existence.html">
+<div class="listing-date">
+Nov 25, 2017
+</div>
+<div class="listing-author">
+Art Steinmetz
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1674579098871" data-listing-reading-time-sort="0.02">
+<div class="thumbnail">
+<a href="./posts/2023_01_24/index.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/2023_01_24/index.html"></a></p>
+</div>
+<div class="body">
+<a href="./posts/2023_01_24/index.html">
+<h3 class="no-anchor listing-title">
+test
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+here is my test.
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2023_01_24/index.html"> </a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
