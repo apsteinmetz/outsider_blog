@@ -272,113 +272,59 @@ deaths_raw&lt;-read_html("death_page2.html") %&gt;%
 
 deaths_raw[1:5,] %&gt;% kable(format.args=list(big.mark=","))</code></pre>
 <table class="table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 4%">
+<col style="width: 14%">
+<col style="width: 23%">
+<col style="width: 26%">
+</colgroup>
 <thead>
 <tr class="header">
-<th align="left">
-Name
-</th>
-<th align="right">
-Age
-</th>
-<th align="left">
-Date
-</th>
-<th align="left">
-Location
-</th>
-<th align="left">
-Cause of death
-</th>
+<th>Name</th>
+<th>Age</th>
+<th>Date</th>
+<th>Location</th>
+<th>Cause of death</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">
-Kansas Joe McCoy, Harlem Hamfats
-</td>
-<td align="right">
-44
-</td>
-<td align="left">
-January 28, 1950
-</td>
-<td align="left">
-Chicago, Illinois, USA
-</td>
-<td align="left">
-Heart disease[1]
-</td>
+<td>Kansas Joe McCoy, Harlem Hamfats</td>
+<td>44</td>
+<td>January 28, 1950</td>
+<td>Chicago, Illinois, USA</td>
+<td>Heart disease[1]</td>
 </tr>
 <tr class="even">
-<td align="left">
-Bertha Hill
-</td>
-<td align="right">
-45
-</td>
-<td align="left">
-May 7, 1950
-</td>
-<td align="left">
-New York City, New York, USA
-</td>
-<td align="left">
-Hit and run accident[2]
-</td>
+<td>Bertha Hill</td>
+<td>45</td>
+<td>May 7, 1950</td>
+<td>New York City, New York, USA</td>
+<td>Hit and run accident[2]</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Papa Charlie McCoy, Harlem Hamfats
-</td>
-<td align="right">
-41
-</td>
-<td align="left">
-July 26, 1950
-</td>
-<td align="left">
-Chicago, Illinois, USA
-</td>
-<td align="left">
-Paralytic brain disease[1]
-</td>
+<td>Papa Charlie McCoy, Harlem Hamfats</td>
+<td>41</td>
+<td>July 26, 1950</td>
+<td>Chicago, Illinois, USA</td>
+<td>Paralytic brain disease[1]</td>
 </tr>
 <tr class="even">
-<td align="left">
-Cecil Gant
-</td>
-<td align="right">
-37
-</td>
-<td align="left">
-February 4, 1951
-</td>
-<td align="left">
-Nashville, Tennessee, USA
-</td>
-<td align="left">
-Pneumonia and heart attack[3]
-</td>
+<td>Cecil Gant</td>
+<td>37</td>
+<td>February 4, 1951</td>
+<td>Nashville, Tennessee, USA</td>
+<td>Pneumonia and heart attack[3]</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Luke Jordan
-</td>
-<td align="right">
-60
-</td>
-<td align="left">
-June 25, 1952
-</td>
-<td align="left">
-Lynchburg, Virginia, USA
-</td>
-<td align="left">
-[4]
-</td>
+<td>Luke Jordan</td>
+<td>60</td>
+<td>June 25, 1952</td>
+<td>Lynchburg, Virginia, USA</td>
+<td>[4]</td>
 </tr>
 </tbody>
-
 </table>
 <p>
 …and so on.
@@ -402,187 +348,88 @@ deaths&lt;-deaths %&gt;% mutate(`Cause of death`=str_replace(`Cause of death`,"\
 deaths&lt;-deaths %&gt;% mutate_cond(is.na(`Cause of death`),`Cause of death`="Not Specified")
 deaths&lt;-deaths %&gt;% mutate_cond(`Cause of death`=="",`Cause of death`="Not Specified")
 deaths[1:5,]%&gt;% kable(format.args=list(big.mark=","))</code></pre>
-
 <table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 8%">
+<col style="width: 20%">
+<col style="width: 19%">
+</colgroup>
 <thead>
 <tr class="header">
-<th align="left">
-Name
-</th>
-<th align="left">
-band1
-</th>
-<th align="left">
-band2
-</th>
-<th align="left">
-band3
-</th>
-<th align="left">
-band4
-</th>
-<th align="right">
-Age
-</th>
-<th align="left">
-Date
-</th>
-<th align="left">
-Location
-</th>
-<th align="left">
-Cause of death
-</th>
+<th>Name</th>
+<th>band1</th>
+<th>band2</th>
+<th>band3</th>
+<th>band4</th>
+<th>Age</th>
+<th>Date</th>
+<th>Location</th>
+<th>Cause of death</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">
-Kansas Joe McCoy
-</td>
-<td align="left">
-Harlem Hamfats
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="right">
-44
-</td>
-<td align="left">
-1950-01-28
-</td>
-<td align="left">
-Chicago, Illinois, USA
-</td>
-<td align="left">
-Heart disease
-</td>
+<td>Kansas Joe McCoy</td>
+<td>Harlem Hamfats</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>44</td>
+<td>1950-01-28</td>
+<td>Chicago, Illinois, USA</td>
+<td>Heart disease</td>
 </tr>
 <tr class="even">
-<td align="left">
-Bertha Hill
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="right">
-45
-</td>
-<td align="left">
-1950-05-07
-</td>
-<td align="left">
-New York City, New York, USA
-</td>
-<td align="left">
-Hit and run accident
-</td>
+<td>Bertha Hill</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>45</td>
+<td>1950-05-07</td>
+<td>New York City, New York, USA</td>
+<td>Hit and run accident</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Papa Charlie McCoy
-</td>
-<td align="left">
-Harlem Hamfats
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="right">
-41
-</td>
-<td align="left">
-1950-07-26
-</td>
-<td align="left">
-Chicago, Illinois, USA
-</td>
-<td align="left">
-Paralytic brain disease
-</td>
+<td>Papa Charlie McCoy</td>
+<td>Harlem Hamfats</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>41</td>
+<td>1950-07-26</td>
+<td>Chicago, Illinois, USA</td>
+<td>Paralytic brain disease</td>
 </tr>
 <tr class="even">
-<td align="left">
-Cecil Gant
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="right">
-37
-</td>
-<td align="left">
-1951-02-04
-</td>
-<td align="left">
-Nashville, Tennessee, USA
-</td>
-<td align="left">
-Pneumonia and heart attack
-</td>
+<td>Cecil Gant</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>37</td>
+<td>1951-02-04</td>
+<td>Nashville, Tennessee, USA</td>
+<td>Pneumonia and heart attack</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Luke Jordan
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="left">
-NA
-</td>
-<td align="right">
-60
-</td>
-<td align="left">
-1952-06-25
-</td>
-<td align="left">
-Lynchburg, Virginia, USA
-</td>
-<td align="left">
-Not Specified
-</td>
+<td>Luke Jordan</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>60</td>
+<td>1952-06-25</td>
+<td>Lynchburg, Virginia, USA</td>
+<td>Not Specified</td>
 </tr>
 </tbody>
-
 </table>
 </section>
 <section id="another-caveat" class="level1">
@@ -618,107 +465,62 @@ cause_table&lt;-deaths %&gt;%
 
 cause_table[1:11,]%&gt;% kable(format.args=list(big.mark=","))</code></pre>
 <table class="table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 11%">
+</colgroup>
 <thead>
 <tr class="header">
-<th align="left">
-Cause of death
-</th>
-<th align="right">
-Cause
-</th>
+<th>Cause of death</th>
+<th>Cause</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">
-Not Specified
-</td>
-<td align="right">
-599
-</td>
+<td>Not Specified</td>
+<td>599</td>
 </tr>
 <tr class="even">
-<td align="left">
-Heart attack
-</td>
-<td align="right">
-240
-</td>
+<td>Heart attack</td>
+<td>240</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Cancer
-</td>
-<td align="right">
-165
-</td>
+<td>Cancer</td>
+<td>165</td>
 </tr>
 <tr class="even">
-<td align="left">
-Lung cancer
-</td>
-<td align="right">
-104
-</td>
+<td>Lung cancer</td>
+<td>104</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Traffic accident
-</td>
-<td align="right">
-78
-</td>
+<td>Traffic accident</td>
+<td>78</td>
 </tr>
 <tr class="even">
-<td align="left">
-Drug overdose
-</td>
-<td align="right">
-74
-</td>
+<td>Drug overdose</td>
+<td>74</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Heart failure
-</td>
-<td align="right">
-74
-</td>
+<td>Heart failure</td>
+<td>74</td>
 </tr>
 <tr class="even">
-<td align="left">
-Stroke
-</td>
-<td align="right">
-59
-</td>
+<td>Stroke</td>
+<td>59</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Natural causes
-</td>
-<td align="right">
-48
-</td>
+<td>Natural causes</td>
+<td>48</td>
 </tr>
 <tr class="even">
-<td align="left">
-Pneumonia
-</td>
-<td align="right">
-48
-</td>
+<td>Pneumonia</td>
+<td>48</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Suicide
-</td>
-<td align="right">
-41
-</td>
+<td>Suicide</td>
+<td>41</td>
 </tr>
 </tbody>
-
 </table>
 <p>
 Looking through the table we see that many causes can be generalized. Let’s aggregate a bit. We are making some choices here. For instance, I call any cause containing the words “heart” or “cardiac” as “heart disease.” I count alcohol as a drug. Where multiple terms exist, drugs trump accidents. Suicide trumps everthing but cancer. Cancer trumps everthing. Note the use of the very handy <code>mutate_cond</code> function.
@@ -805,7 +607,7 @@ gg&lt;-cause_table[1:12,]  %&gt;%
 gg&lt;-gg+coord_flip()
 gg</code></pre>
 <p></p>
-<img src="img/unnamed-chunk-11-1.png" class="img-fluid">
+<p><img src="img/unnamed-chunk-11-1.png" class="img-fluid"></p>
 <p>
 NOW, we are done with all the data wrangling and can get to the (morbid) fun stuff.
 </p>
@@ -818,109 +620,63 @@ This gives us a decent picture of how rock stars die. Mostly from the same thing
                                       'Suicide','Murdered','Other')),
                       US=c(633842,595930,212103,146571,140323,110561,79535,49959,44193,15696,683917))
 us_deaths %&gt;% kable(format.args=list(big.mark=","))</code></pre>
-
 <table class="table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 13%">
+</colgroup>
 <thead>
 <tr class="header">
-<th align="left">
-General_Cause
-</th>
-<th align="right">
-US
-</th>
+<th>General_Cause</th>
+<th>US</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">
-Heart Disease
-</td>
-<td align="right">
-633,842
-</td>
+<td>Heart Disease</td>
+<td>633,842</td>
 </tr>
 <tr class="even">
-<td align="left">
-Cancer
-</td>
-<td align="right">
-595,930
-</td>
+<td>Cancer</td>
+<td>595,930</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Lung Disease
-</td>
-<td align="right">
-212,103
-</td>
+<td>Lung Disease</td>
+<td>212,103</td>
 </tr>
 <tr class="even">
-<td align="left">
-Accident
-</td>
-<td align="right">
-146,571
-</td>
+<td>Accident</td>
+<td>146,571</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Stroke
-</td>
-<td align="right">
-140,323
-</td>
+<td>Stroke</td>
+<td>140,323</td>
 </tr>
 <tr class="even">
-<td align="left">
-Alzheimers
-</td>
-<td align="right">
-110,561
-</td>
+<td>Alzheimers</td>
+<td>110,561</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Diabetes
-</td>
-<td align="right">
-79,535
-</td>
+<td>Diabetes</td>
+<td>79,535</td>
 </tr>
 <tr class="even">
-<td align="left">
-Liver Disease
-</td>
-<td align="right">
-49,959
-</td>
+<td>Liver Disease</td>
+<td>49,959</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Suicide
-</td>
-<td align="right">
-44,193
-</td>
+<td>Suicide</td>
+<td>44,193</td>
 </tr>
 <tr class="even">
-<td align="left">
-Murdered
-</td>
-<td align="right">
-15,696
-</td>
+<td>Murdered</td>
+<td>15,696</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Other
-</td>
-<td align="right">
-683,917
-</td>
+<td>Other</td>
+<td>683,917</td>
 </tr>
 </tbody>
-
 </table>
 <p>
 We might also note: Murder: 15,696 (<a href="https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-4" class="uri">https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-4</a>)
@@ -1021,7 +777,7 @@ We need to apply the expected longevity for each musician for the year they were
 The plot below shows how the average age at death has changed over the years for rock musicians and the population as a whole. The series for rock musicians in the chart is very unstable early on because the sample size is so small. Despite this caveat and the warning about extrapolation
 </p>
 <p>
-Plotting note: I am not using “tidy”" data here so I roll some intersting g-g-jitsu to get the legends nice. The musician data and the U.S. population data are in separate columns so they get plotted with separate <code>geom_line</code> aesthetics. We could use <code>gather</code> to make the data tidy but that would complicate taking the difference to show the <code>gap</code> series. This data formate makes it easy to just put it in a new column.
+Plotting note: I am not using “tidy”” data here so I roll some intersting g-g-jitsu to get the legends nice. The musician data and the U.S. population data are in separate columns so they get plotted with separate <code>geom_line</code> aesthetics. We could use <code>gather</code> to make the data tidy but that would complicate taking the difference to show the <code>gap</code> series. This data formate makes it easy to just put it in a new column.
 </p>
 <pre class="r"><code>#merge deaths with life expectancy for the relevant birth year.  Determine
 #whether they died "young"  or outlived expectations.
@@ -1114,107 +870,65 @@ Well, well, well. It turns out that 27 IS a risky age! Optically, it looks like 
   summarise(Count=n()) %&gt;%
   arrange(desc(Count))%&gt;% 
   kable(format.args=list(big.mark=","))</code></pre>
-
 <table class="table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 11%">
+</colgroup>
 <thead>
 <tr class="header">
-<th align="left">
-General_Cause
-</th>
-<th align="right">
-Count
-</th>
+<th>General_Cause</th>
+<th>Count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">
-Accident
-</td>
-<td align="right">
-9
-</td>
+<td>Accident</td>
+<td>9</td>
 </tr>
 <tr class="even">
-<td align="left">
-Drugs
-</td>
-<td align="right">
-8
-</td>
+<td>Drugs</td>
+<td>8</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Other
-</td>
-<td align="right">
-6
-</td>
+<td>Other</td>
+<td>6</td>
 </tr>
 <tr class="even">
-<td align="left">
-Suicide
-</td>
-<td align="right">
-5
-</td>
+<td>Suicide</td>
+<td>5</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Not Specified
-</td>
-<td align="right">
-4
-</td>
+<td>Not Specified</td>
+<td>4</td>
 </tr>
 <tr class="even">
-<td align="left">
-Murdered
-</td>
-<td align="right">
-3
-</td>
+<td>Murdered</td>
+<td>3</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Cancer
-</td>
-<td align="right">
-1
-</td>
+<td>Cancer</td>
+<td>1</td>
 </tr>
 <tr class="even">
-<td align="left">
-Diabetes
-</td>
-<td align="right">
-1
-</td>
+<td>Diabetes</td>
+<td>1</td>
 </tr>
 <tr class="odd">
-<td align="left">
-Heart Disease
-</td>
-<td align="right">
-1
-</td>
+<td>Heart Disease</td>
+<td>1</td>
 </tr>
 <tr class="even">
-<td align="left">
-Lung Disease
-</td>
-<td align="right">
-1
-</td>
+<td>Lung Disease</td>
+<td>1</td>
 </tr>
 </tbody>
-
 </table>
 <p>
 Tragic, of course. Those of us who have achieved a certain age occasionally reflect upon all the times in our youth when we did stupid stuff that could have killed us but luck favored us at that moment. Did I say “we?” Well maybe just me.
 </p>
 <p>
-How do causes of death change as rock musicians age? For this we’ll use a <code>geom_density</code> plot to get smooth progressions over time in a stacked format. Using <code>position="fill"</code> is the way to get the stack of causes to reach 100% for all age cohorts. I mention this because I was scratching my head over how to do this. I was confusing the use of the argument <code>"fill"</code> in this context with the use of <code>fill</code> to create a different series for each categories of a variable. We use <code>fill</code> in both senses here: <code>geom_density(aes(fill=General_Cause),color="grey",position="fill")</code>
+How do causes of death change as rock musicians age? For this we’ll use a <code>geom_density</code> plot to get smooth progressions over time in a stacked format. Using <code>position=“fill”</code> is the way to get the stack of causes to reach 100% for all age cohorts. I mention this because I was scratching my head over how to do this. I was confusing the use of the argument <code>“fill”</code> in this context with the use of <code>fill</code> to create a different series for each categories of a variable. We use <code>fill</code> in both senses here: <code>geom_density(aes(fill=General_Cause),color=“grey”,position=“fill”)</code>
 </p>
 <p>
 If we assume “Not Specified” deaths are in proportion to the reported causes, we can filter it it out get a clearer picture.
@@ -1245,14 +959,14 @@ If you make it into your 50s as a rocker you are out of the woods for suicide, m
 A couple more questions suggested by our discoveries.
 </h1>
 <p>
-Note the emergence and dissapearce of AIDS as a cause of death from people in their late 20s to 50. Is this a function of just the 80s and 90s when AIDS was a particular scourge? Is it now a chronic, manageable, condition so that it won’t be a frequent cause of death any more? Let’s look at the number of reported AIDS deaths by year.
+Note the emergence and disappearance of AIDS as a cause of death from people in their late 20s to 50. Is this a function of just the 80s and 90s when AIDS was a particular scourge? Is it now a chronic, manageable, condition so that it won’t be a frequent cause of death any more? Let’s look at the number of reported AIDS deaths by year.
 </p>
 <pre class="r"><code>deaths %&gt;% filter(General_Cause=="AIDS") %&gt;% ggplot(aes(Year))+geom_bar()</code></pre>
 <p>
 <img src="img/unnamed-chunk-20-1.png" class="img-fluid">
 </p>
 <p>
-There are so few instances of AIDS deaths that we can’t be confident of our hypothesis. Still, it is consistent with the dissapearance of AIDS as a cause after 2001 for many years - until 2017. The last case is Michael Freidman. I question his inclusion on this list as he was known as a Broadway song writer. Still his was a tragic case. His disease progressed rapidly but neither he nor his friends believed it was possible that HIV was causing his symptoms. By the time he sought medical attention it was too late. <a href="https://www.nytimes.com/2017/10/11/theater/michael-friedman-aids-death-theater.html">The theatre community was stunned</a> that, in this place and time, AIDS could still kill someone.
+There are so few instances of AIDS deaths that we can’t be confident of our hypothesis. Still, it is consistent with the dissapearance of AIDS as a cause after 2001 for many years - until 2017. The last case is Michael Freidman. I question his inclusion on this list as he was known as a Broadway song writer. Still, his was a tragic case. His disease progressed rapidly but neither he nor his friends believed it was possible that HIV was causing his symptoms. By the time he sought medical attention it was too late. <a href="https://www.nytimes.com/2017/10/11/theater/michael-friedman-aids-death-theater.html">The theatre community was stunned</a> that, in this place and time, AIDS could still kill someone.
 </p>
 <p>
 Finally, let’s use this data to question our “live fast” assertion from above. We know deaths from all causes rise with age. Maybe the asbsolute number of accidental deaths stays the same (or even rises) but just goes down relative to other causes common to all geezers. As a reality check, let’s ask if the absolute number changes with age.
