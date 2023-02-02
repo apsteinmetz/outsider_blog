@@ -61,5 +61,12 @@
     "title": "Switching to Quarto from Blogdown",
     "section": "",
     "text": "Create subfolder in our ‘posts’ folder to hold converted file. Use any name but I like the form ’yyyy-mm-dd_name-of-post.\nCreate subfolder below the one just created called ‘img’.\nCopy any image files from the old version over to the ‘img’ directory we just made.\nCopy rendered HTML document (not the RMD markdown document) to the new folder.\nRename copied HTML file from <filename>.html to <filename>.qmd.\nLoad QMD file into RStudio.\nSearch/Replace all instances of `class=“r”` to `class=“sourceCode r”`.\nFix path names of any image files to point to the ‘img’ folder.\nSave and Render. Done!"
+  },
+  {
+    "objectID": "posts/2023-01-24_Switching-to-Quarto/2023-1-24_switching-to-quarto.html",
+    "href": "posts/2023-01-24_Switching-to-Quarto/2023-1-24_switching-to-quarto.html",
+    "title": "Switching to Quarto from Blogdown",
+    "section": "",
+    "text": "Create subfolder in our ‘posts’ folder to hold converted file. Use any name but I like the form yyyy-mm-dd_name-of-post.\nCreate subfolder below the one just created called ‘img’.\nCopy any image files from the old version over to the ‘img’ directory we just made.\nCopy old rendered HTML document (not the RMD markdown document) to the new folder.\nRename copied HTML file from <filename>.html to <filename>.qmd.\nLoad QMD file into RStudio.\nSearch/Replace all instances of `class=“r”` to `class=“sourceCode r”`.\nFix path names of any image files to point to the ‘img’ folder.\nSave and Render. Done!"
   }
 ]
