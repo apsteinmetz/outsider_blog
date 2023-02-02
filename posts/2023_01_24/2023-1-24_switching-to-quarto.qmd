@@ -1,0 +1,13 @@
+---
+title: "Switching to Quarto from Blogdown"
+---
+
+1.  Create subfolder in our 'posts' folder to hold converted file. Use any name but I like the form '*yyyy-mm-dd_name-of-post*.
+2.  Create subfolder below the one just created called 'img'.
+3.  Copy any image files from the old version over to the 'img' directory we just made.
+4.  Copy rendered HTML document (not the RMD markdown document) to the new folder.
+5.  Rename copied HTML file from *\<filename\>.html* to *\<filename\>.qmd*.
+6.  Load QMD file into RStudio.
+7.  Search/Replace all instances of \`class="r"\` to \`class="sourceCode r"\`.
+8.  Fix path names of any image files to point to the 'img' folder.
+9.  Save and Render. Done!

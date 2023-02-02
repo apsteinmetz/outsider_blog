@@ -26,7 +26,7 @@ tags:
 <p>Note the <code>mutate_cond</code> function in the chunk below. We'll use it later.</p>
 
 ```{=html}
-<pre class="r"><code>library(ggplot2)
+<pre class="sourceCode r"><code>library(ggplot2)
 library(stringr)
 library(tidyverse)
 library(lubridate)
@@ -57,7 +57,7 @@ mutate_cond &lt;- function(.data, condition, ..., envir = parent.frame()) {
 <p>The deaths for 2010 and later are in a separate article so we need to get both. When I started this project they were on one page. By the time you read this the Wikipedia gods may have changed it again. Beware.</p>
 
 ```{=html}
-<pre class="r"><code>death_page1&lt;-read_html(&quot;https://en.wikipedia.org/wiki/List_of_deaths_in_rock_and_roll&quot;)
+<pre class="sourceCode r"><code>death_page1&lt;-read_html(&quot;https://en.wikipedia.org/wiki/List_of_deaths_in_rock_and_roll&quot;)
 write_html(death_page1,file=&quot;death_page1.html&quot;)
 death_page2&lt;-read_html(&quot;https://en.wikipedia.org/wiki/List_of_2010s_deaths_in_rock_and_roll&quot;)
 write_html(death_page2,file=&quot;death_page2.html&quot;)</code></pre>
@@ -70,7 +70,7 @@ write_html(death_page2,file=&quot;death_page2.html&quot;)</code></pre>
 <p>Consider a trival example:</p>
 
 ```{=html}
-<pre class="r"><code>#usual R behavior
+<pre class="sourceCode r"><code>#usual R behavior
 my_function&lt;- function(x){return (x+1)}
 data=3
 `#this doesn&#39;t change data but it would if data was passed by reference
@@ -90,7 +90,7 @@ data
 <p>Alternatively, we could load the two pages, extract the tables separately and combine them later but this is trickier!</p>
 
 ```{=html}
-<pre class="r"><code>#join pre-2010 to post 2010
+<pre class="sourceCode r"><code>#join pre-2010 to post 2010
 death_page&lt;-death_page1
 death_page_child&lt;-death_page1 %&gt;% xml_children() %&gt;% .[2]
 death_page2_child&lt;-death_page2 %&gt;% xml_children() %&gt;% .[2]
@@ -113,7 +113,7 @@ write_html(death_page,file=&quot;death_page.html&quot;)</code></pre>
 <p>Parsing HTML is a dark art and I would not rise to the level of sorcerer's apprentice. The clue that will let us separate the two (or more) identifiers is that the band is encased in a <code>\<small\>\<\small\></code> tag within the <code>\<tr\>\<\tr\></code> tag that <code>html_table</code> looks for. Extracting the just the text from the cell concatenates the two items without a separator. The <code>rvest</code> functions won't help this noob here. I chose to do old-school raw text editing with search/replace to break the person and the band into separate columns. So instead of <code>\<td\>Person\<small\>Band,Band\<\small\>\<\td\></code> we want to have <code>\<td\>Person,Band,band\<\td\></code>. This way we can separate out band names later.</p>
 
 ```{=html}
-<pre class="r"><code>#Crude hack follows
+<pre class="sourceCode r"><code>#Crude hack follows
 # read it in as a raw text file and edit the tags
 # to break the artist name and band names into comma-separated list
 # by replacing &#39;&lt;small&gt;&#39; with &#39;,&#39;.
@@ -127,7 +127,7 @@ write_file(death_page_text,&quot;death_page2.html&quot;)</code></pre>
 <p>Also omit the first five tables which, by inspection, we know are not the mortality tables.</p>
 
 ```{=html}
-<pre class="r"><code># omit first five tables
+<pre class="sourceCode r"><code># omit first five tables
 deaths_raw&lt;-read_html(&quot;death_page2.html&quot;) %&gt;% 
   html_nodes(&quot;table&quot;) %&gt;% 
   .[5:length(.)] %&gt;% 
@@ -139,26 +139,20 @@ deaths_raw&lt;-read_html(&quot;death_page2.html&quot;) %&gt;%
 
 deaths_raw[1:5,] %&gt;% kable(format.args=list(big.mark=&quot;,&quot;))</code></pre>
 ```
-+------------------------------------+-----+------------------+------------------------------+---------------------------------+
 | Name                               | Age | Date             | Location                     | Cause of death                  |
-+====================================+=====+==================+==============================+=================================+
+|-----------------|--------------|--------------|--------------|---------------|
 | Kansas Joe McCoy, Harlem Hamfats   | 44  | January 28, 1950 | Chicago, Illinois, USA       | Heart disease\[1\]              |
-+------------------------------------+-----+------------------+------------------------------+---------------------------------+
 | Bertha Hill                        | 45  | May 7, 1950      | New York City, New York, USA | Hit and run accident\[2\]       |
-+------------------------------------+-----+------------------+------------------------------+---------------------------------+
 | Papa Charlie McCoy, Harlem Hamfats | 41  | July 26, 1950    | Chicago, Illinois, USA       | Paralytic brain disease\[1\]    |
-+------------------------------------+-----+------------------+------------------------------+---------------------------------+
 | Cecil Gant                         | 37  | February 4, 1951 | Nashville, Tennessee, USA    | Pneumonia and heart attack\[3\] |
-+------------------------------------+-----+------------------+------------------------------+---------------------------------+
 | Luke Jordan                        | 60  | June 25, 1952    | Lynchburg, Virginia, USA     | \[4\]                           |
-+------------------------------------+-----+------------------+------------------------------+---------------------------------+
 
 <p>...and so on.</p>
 
 <p>Almost done with the boring bits. Separate out the list of name and bands into, at most, four bands. Turn the date string into a POSIX-style date. Replace the empty causes with "Not Specified." Finally, strip the footnote numbers out of the file.</p>
 
 ```{=html}
-<pre class="r"><code>#take at most three band names.
+<pre class="sourceCode r"><code>#take at most three band names.
 deaths&lt;-deaths_raw %&gt;% 
   separate(Name,into=c(&quot;Name&quot;,&quot;band1&quot;,&quot;band2&quot;,&quot;band3&quot;,&quot;band4&quot;),sep=&quot;,&quot;,extra=&quot;drop&quot;) %&gt;% 
   unique()
@@ -175,19 +169,13 @@ deaths&lt;-deaths %&gt;% mutate_cond(is.na(`Cause of death`),`Cause of death`=&q
 deaths&lt;-deaths %&gt;% mutate_cond(`Cause of death`==&quot;&quot;,`Cause of death`=&quot;Not Specified&quot;)
 deaths[1:5,]%&gt;% kable(format.args=list(big.mark=&quot;,&quot;))</code></pre>
 ```
-+--------------------+----------------+-------+-------+-------+------+------------+------------------------------+----------------------------+
-| Name               | band1          | band2 | band3 | band4 | Age  | Date       | Location                     | Cause of death             |
-+====================+================+=======+=======+=======+======+============+==============================+============================+
-| Kansas Joe McCoy   | Harlem Hamfats | NA    | NA    | NA    | 44   | 1950-01-28 | Chicago, Illinois, USA       | Heart disease              |
-+--------------------+----------------+-------+-------+-------+------+------------+------------------------------+----------------------------+
-| Bertha Hill        | NA             | NA    | NA    | NA    | 45   | 1950-05-07 | New York City, New York, USA | Hit and run accident       |
-+--------------------+----------------+-------+-------+-------+------+------------+------------------------------+----------------------------+
-| Papa Charlie McCoy | Harlem Hamfats | NA    | NA    | NA    | 41   | 1950-07-26 | Chicago, Illinois, USA       | Paralytic brain disease    |
-+--------------------+----------------+-------+-------+-------+------+------------+------------------------------+----------------------------+
-| Cecil Gant         | NA             | NA    | NA    | NA    | 37   | 1951-02-04 | Nashville, Tennessee, USA    | Pneumonia and heart attack |
-+--------------------+----------------+-------+-------+-------+------+------------+------------------------------+----------------------------+
-| Luke Jordan        | NA             | NA    | NA    | NA    | 60   | 1952-06-25 | Lynchburg, Virginia, USA     | Not Specified              |
-+--------------------+----------------+-------+-------+-------+------+------------+------------------------------+----------------------------+
+| Name               | band1          | band2 | band3 | band4 | Age | Date       | Location                     | Cause of death             |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| Kansas Joe McCoy   | Harlem Hamfats | NA    | NA    | NA    | 44  | 1950-01-28 | Chicago, Illinois, USA       | Heart disease              |
+| Bertha Hill        | NA             | NA    | NA    | NA    | 45  | 1950-05-07 | New York City, New York, USA | Hit and run accident       |
+| Papa Charlie McCoy | Harlem Hamfats | NA    | NA    | NA    | 41  | 1950-07-26 | Chicago, Illinois, USA       | Paralytic brain disease    |
+| Cecil Gant         | NA             | NA    | NA    | NA    | 37  | 1951-02-04 | Nashville, Tennessee, USA    | Pneumonia and heart attack |
+| Luke Jordan        | NA             | NA    | NA    | NA    | 60  | 1952-06-25 | Lynchburg, Virginia, USA     | Not Specified              |
 :::
 
 ::: {#another-caveat .section .level1}
@@ -196,7 +184,7 @@ deaths[1:5,]%&gt;% kable(format.args=list(big.mark=&quot;,&quot;))</code></pre>
 <p>Now we have a clean table. Before going further we should note that death entries are growing over time. No great surprises here but but note that the in the early days of rock there were were few old rockers. We should keep this in the back of our mind as we proceed.</p>
 
 ```{=html}
-<pre class="r"><code>deaths&lt;-deaths %&gt;% mutate(Year=year(Date))
+<pre class="sourceCode r"><code>deaths&lt;-deaths %&gt;% mutate(Year=year(Date))
 
 deaths %&gt;%  
   group_by(Year) %&gt;% 
@@ -210,7 +198,7 @@ deaths %&gt;%
 <p>Let's do a quick exploration to see if we are satisfied with the features of our data set.</p>
 
 ```{=html}
-<pre class="r"><code>#what are common causes of death
+<pre class="sourceCode r"><code>#what are common causes of death
 cause_table&lt;-deaths %&gt;% 
   group_by(`Cause of death`) %&gt;% 
   summarize(Cause=n()) %&gt;% 
@@ -218,36 +206,24 @@ cause_table&lt;-deaths %&gt;%
 
 cause_table[1:11,]%&gt;% kable(format.args=list(big.mark=&quot;,&quot;))</code></pre>
 ```
-+------------------+-------+
 | Cause of death   | Cause |
-+==================+=======+
+|------------------|-------|
 | Not Specified    | 599   |
-+------------------+-------+
 | Heart attack     | 240   |
-+------------------+-------+
 | Cancer           | 165   |
-+------------------+-------+
 | Lung cancer      | 104   |
-+------------------+-------+
 | Traffic accident | 78    |
-+------------------+-------+
 | Drug overdose    | 74    |
-+------------------+-------+
 | Heart failure    | 74    |
-+------------------+-------+
 | Stroke           | 59    |
-+------------------+-------+
 | Natural causes   | 48    |
-+------------------+-------+
 | Pneumonia        | 48    |
-+------------------+-------+
 | Suicide          | 41    |
-+------------------+-------+
 
 <p>Looking through the table we see that many causes can be generalized. Let's aggregate a bit. We are making some choices here. For instance, I call any cause containing the words "heart" or "cardiac" as "heart disease." I count alcohol as a drug. Where multiple terms exist, drugs trump accidents. Suicide trumps everthing but cancer. Cancer trumps everthing. Note the use of the very handy <code>mutate_cond</code> function.</p>
 
 ```{=html}
-<pre class="r"><code>#add a new column &quot;general cause&quot;
+<pre class="sourceCode r"><code>#add a new column &quot;general cause&quot;
 deaths&lt;-deaths %&gt;% mutate(General_Cause=`Cause of death`)
 
 deaths&lt;-deaths %&gt;% 
@@ -300,7 +276,7 @@ deaths&lt;-deaths %&gt;%
 <p>Further aggregate causes. Arbitrarily, label the general cause of any cause below the top 15 as "Other."</p>
 
 ```{=html}
-<pre class="r"><code>cause_table&lt;-deaths %&gt;% 
+<pre class="sourceCode r"><code>cause_table&lt;-deaths %&gt;% 
   count(General_Cause) %&gt;% 
   arrange(desc(n)) %&gt;% 
   rename(Rockers=n)
@@ -338,38 +314,26 @@ gg</code></pre>
 <p>This gives us a decent picture of how rock stars die. Mostly from the same things that kill all of us. Heart disease and cancer were the leading causes of death in US in 2015, followed by lung disease and accidents according to <a href="https://www.cdc.gov/nchs/fastats/deaths.htm" class="uri">https://www.cdc.gov/nchs/fastats/deaths.htm</a> and shown below.</p>
 
 ```{=html}
-<pre class="r"><code>us_deaths&lt;-data_frame(General_Cause=as_factor(c(&#39;Heart Disease&#39;,&#39;Cancer&#39;,
+<pre class="sourceCode r"><code>us_deaths&lt;-data_frame(General_Cause=as_factor(c(&#39;Heart Disease&#39;,&#39;Cancer&#39;,
                                       &#39;Lung Disease&#39;,&#39;Accident&#39;,&#39;Stroke&#39;,
                                       &#39;Alzheimers&#39;,&#39;Diabetes&#39;,&#39;Liver Disease&#39;,
                                       &#39;Suicide&#39;,&#39;Murdered&#39;,&#39;Other&#39;)),
                       US=c(633842,595930,212103,146571,140323,110561,79535,49959,44193,15696,683917))
 us_deaths %&gt;% kable(format.args=list(big.mark=&quot;,&quot;))</code></pre>
 ```
-+---------------+---------+
 | General_Cause | US      |
-+===============+=========+
+|---------------|---------|
 | Heart Disease | 633,842 |
-+---------------+---------+
 | Cancer        | 595,930 |
-+---------------+---------+
 | Lung Disease  | 212,103 |
-+---------------+---------+
 | Accident      | 146,571 |
-+---------------+---------+
 | Stroke        | 140,323 |
-+---------------+---------+
 | Alzheimers    | 110,561 |
-+---------------+---------+
 | Diabetes      | 79,535  |
-+---------------+---------+
 | Liver Disease | 49,959  |
-+---------------+---------+
 | Suicide       | 44,193  |
-+---------------+---------+
 | Murdered      | 15,696  |
-+---------------+---------+
 | Other         | 683,917 |
-+---------------+---------+
 
 <p>We might also note: Murder: 15,696 (<a href="https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-4" class="uri">https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-4</a>)</p>
 
@@ -396,7 +360,7 @@ us_deaths %&gt;% kable(format.args=list(big.mark=&quot;,&quot;))</code></pre>
 <p>While the big killers are the same for both populations, is there evidence that rockers "live fast?" Yes, it turns out.</p>
 
 ```{=html}
-<pre class="r"><code># we assume the CDC calls drug overdoses an accident so we will too.
+<pre class="sourceCode r"><code># we assume the CDC calls drug overdoses an accident so we will too.
 comp_deaths&lt;-cause_table %&gt;% 
   mutate_cond(General_Cause==&quot;Drugs&quot;,General_Cause=&quot;Accident&quot;) %&gt;% 
   group_by(General_Cause) %&gt;% 
@@ -427,7 +391,7 @@ gg</code></pre>
 <p>We've <code>\<grin\></code>scientifically proven<code>\</grin\></code> that rock stars "live fast." Do they die young? Life expectancies have grown over the years so taking an aggregate average age at death going back to 1950 won't be comprable to current US life expectancy. To get a comparison let's pull the data from the <code>gapminder</code> package. This shows life expectancy at birth as opposed to average age at death, which is what our data set has now. We have to get a bit tricky to make the numbers comparable by taking <code>date</code> minus <code>Age</code> to get <code>birth_year</code>. We take the gapminder life expectancy for <code>birth_year</code> and compare that to <code>Age</code> at death. The earliest birth years in our data are much earlier than what the gapminder set covers so we need to extrapolate the data, as well. If we were doing REAL data science we would find a better mortality data set, but this is OUTSIDER data science! We keep it simple.</p>
 
 ```{=html}
-<pre class="r"><code>#Add birth year column.
+<pre class="sourceCode r"><code>#Add birth year column.
 deaths&lt;-deaths %&gt;% mutate(birth_year=year(Date)-Age)
 
 #Create extrapolation of gapminder life expectancy using the full range of birth
@@ -457,7 +421,7 @@ life_exp %&gt;% ggplot(aes(birth_year,expected_longevity))+geom_line()+geom_poin
 <p>Plotting note: I am not using "tidy"" data here so I roll some intersting g-g-jitsu to get the legends nice. The musician data and the U.S. population data are in separate columns so they get plotted with separate <code>geom_line</code> aesthetics. We could use <code>gather</code> to make the data tidy but that would complicate taking the difference to show the <code>gap</code> series. This data formate makes it easy to just put it in a new column.</p>
 
 ```{=html}
-<pre class="r"><code>#merge deaths with life expectancy for the relevant birth year.  Determine
+<pre class="sourceCode r"><code>#merge deaths with life expectancy for the relevant birth year.  Determine
 #whether they died &quot;young&quot;  or outlived expectations.
 deaths &lt;- deaths %&gt;% 
   left_join(life_exp) %&gt;% 
@@ -492,7 +456,7 @@ gg</code></pre>
 <p>Aww, heck with it. Let's show the tidyverse way to roll this. Start from the <code>death_age</code> table we created above. Tidyfy it with <code>gather</code>, then plot.</p>
 
 ```{=html}
-<pre class="r"><code>gg&lt;-death_age %&gt;% gather(key=&quot;cohort&quot;,value=&quot;death_age&quot;,-Year) %&gt;% 
+<pre class="sourceCode r"><code>gg&lt;-death_age %&gt;% gather(key=&quot;cohort&quot;,value=&quot;death_age&quot;,-Year) %&gt;% 
   ggplot(aes(Year,death_age,color=cohort))+geom_line()+geom_hline(yintercept = 0)
 gg&lt;-gg+labs(title=&quot;Rock Stars Don&#39;t Die Young Anymore\nRocker Death Age vs. U.S. Population&quot;,
             y=&quot;Average Age At Death&quot;,
@@ -516,7 +480,7 @@ gg</code></pre>
 <p>We'll plot the number of deaths by age and highlight 27. Create the highlight by making a vector, <code>fills</code>, that specifies the color of each bar in advance. At first glance, creating <code>fills</code> seems overly complicated. It's slightly tricky since not all ages have deaths so a consecutive series won't work.</p>
 
 ```{=html}
-<pre class="r"><code>highlight=27
+<pre class="sourceCode r"><code>highlight=27
 # the code below creates the list of colors for plot bars, making just one red.
 # I suspect I am making this harder than it needs to be.
 fills&lt;-deaths %&gt;% 
@@ -538,35 +502,24 @@ gg</code></pre>
 <p>Well, well, well. It turns out that 27 IS a risky age! Optically, it looks like about double the mortality we might otherwise expect. We always have to be wary of carts leading horses, though. Perhaps the folks who are interested in the topic are more than usually dilligent in finding examples and adding them to the Wikipedia page. Still, it's fascinating. Why do 27-year olds die? You already know the answer.</p>
 
 ```{=html}
-<pre class="r"><code>deaths %&gt;% filter(Age==highlight) %&gt;% 
+<pre class="sourceCode r"><code>deaths %&gt;% filter(Age==highlight) %&gt;% 
   group_by(General_Cause) %&gt;% 
   summarise(Count=n()) %&gt;%
   arrange(desc(Count))%&gt;% 
   kable(format.args=list(big.mark=&quot;,&quot;))</code></pre>
 ```
-+---------------+-------+
 | General_Cause | Count |
-+===============+=======+
+|---------------|-------|
 | Accident      | 9     |
-+---------------+-------+
 | Drugs         | 8     |
-+---------------+-------+
 | Other         | 6     |
-+---------------+-------+
 | Suicide       | 5     |
-+---------------+-------+
 | Not Specified | 4     |
-+---------------+-------+
 | Murdered      | 3     |
-+---------------+-------+
 | Cancer        | 1     |
-+---------------+-------+
 | Diabetes      | 1     |
-+---------------+-------+
 | Heart Disease | 1     |
-+---------------+-------+
 | Lung Disease  | 1     |
-+---------------+-------+
 
 <p>Tragic, of course. Those of us who have achieved a certain age occasionally reflect upon all the times in our youth when we did stupid stuff that could have killed us but luck favored us at that moment. Did I say "we?" Well maybe just me.</p>
 
@@ -575,7 +528,7 @@ gg</code></pre>
 <p>If we assume "Not Specified" deaths are in proportion to the reported causes, we can filter it it out get a clearer picture.</p>
 
 ```{=html}
-<pre class="r"><code>#cut off below 21 and above 85 because the data gets pretty thin
+<pre class="sourceCode r"><code>#cut off below 21 and above 85 because the data gets pretty thin
 gg&lt;-deaths %&gt;%  
   filter(General_Cause != &quot;Not Specified&quot;) %&gt;% 
   filter(Age &gt;21,Age&lt;86) %&gt;% 
@@ -601,7 +554,7 @@ gg</code></pre>
 <p>Note the emergence and disappearance of AIDS as a cause of death from people in their late 20s to 50. Is this a function of just the 80s and 90s when AIDS was a particular scourge? Is it now a chronic, manageable, condition so that it won't be a frequent cause of death any more? Let's look at the number of reported AIDS deaths by year.</p>
 
 ```{=html}
-<pre class="r"><code>deaths %&gt;% filter(General_Cause==&quot;AIDS&quot;) %&gt;% ggplot(aes(Year))+geom_bar()</code></pre>
+<pre class="sourceCode r"><code>deaths %&gt;% filter(General_Cause==&quot;AIDS&quot;) %&gt;% ggplot(aes(Year))+geom_bar()</code></pre>
 ```
 <p>![](img/unnamed-chunk-20-1.png)</p>
 
@@ -610,7 +563,7 @@ gg</code></pre>
 <p>Finally, let's use this data to question our "live fast" assertion from above. We know deaths from all causes rise with age. Maybe the asbsolute number of accidental deaths stays the same (or even rises) but just goes down relative to other causes common to all geezers. As a reality check, let's ask if the absolute number changes with age.</p>
 
 ```{=html}
-<pre class="r"><code>gg&lt;-deaths  %&gt;% 
+<pre class="sourceCode r"><code>gg&lt;-deaths  %&gt;% 
   ggplot(aes(Age,fill=&quot;grey&quot;))+geom_histogram(bins=10)
 gg&lt;-gg+labs(title=&#39;Number of Reported Deaths by Accident, by Age&#39;,
             x=&#39;Age at Death&#39;,

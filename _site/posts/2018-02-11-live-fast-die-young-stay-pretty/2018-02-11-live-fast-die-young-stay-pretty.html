@@ -155,7 +155,7 @@ Load libraries and do some setup.
 <p>
 Note the <code>mutate_cond</code> function in the chunk below. We’ll use it later.
 </p>
-<pre class="r"><code>library(ggplot2)
+<pre class="sourceCode r code-with-copy"><code>library(ggplot2)
 library(stringr)
 library(tidyverse)
 library(lubridate)
@@ -174,7 +174,7 @@ mutate_cond &lt;- function(.data, condition, ..., envir = parent.frame()) {
   condition[is.na(condition)] = FALSE
   .data[condition, ] &lt;- .data[condition, ] %&gt;% mutate(...)
   .data
-}</code></pre>
+}</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 </section>
 <section id="load-tables-from-wikipedia." class="level1">
 <h1>
@@ -186,10 +186,10 @@ Wikipedia maintains a table of <a href="https://en.wikipedia.org/wiki/List_of_de
 <p>
 The deaths for 2010 and later are in a separate article so we need to get both. When I started this project they were on one page. By the time you read this the Wikipedia gods may have changed it again. Beware.
 </p>
-<pre class="r"><code>death_page1&lt;-read_html("https://en.wikipedia.org/wiki/List_of_deaths_in_rock_and_roll")
+<pre class="sourceCode r code-with-copy"><code>death_page1&lt;-read_html("https://en.wikipedia.org/wiki/List_of_deaths_in_rock_and_roll")
 write_html(death_page1,file="death_page1.html")
 death_page2&lt;-read_html("https://en.wikipedia.org/wiki/List_of_2010s_deaths_in_rock_and_roll")
-write_html(death_page2,file="death_page2.html")</code></pre>
+write_html(death_page2,file="death_page2.html")</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <section id="a-note-on-pointers." class="level2">
 <h2 class="anchored" data-anchor-id="a-note-on-pointers.">
 A note on “pointers.”
@@ -200,7 +200,7 @@ R and the <code>rvest</code> package have some great functions for converting ht
 <p>
 Consider a trival example:
 </p>
-<pre class="r"><code>#usual R behavior
+<pre class="sourceCode r code-with-copy"><code>#usual R behavior
 my_function&lt;- function(x){return (x+1)}
 data=3
 `#this doesn't change data but it would if data was passed by reference
@@ -211,7 +211,7 @@ data
 `#this does change data in the usual R way
 data&lt;-my_function(data)
 data
-`# [1] 4</code></pre>
+`# [1] 4</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <p>
 If we were passing values “by reference” <code>my_function(data)</code> would change <code>data</code> without the need to assign it back to <code>data</code>. That’s how <code>rvest</code> works.
 </p>
@@ -221,7 +221,7 @@ We use this behavior to combine the tables in the two Wikipedia articles into on
 <p>
 Alternatively, we could load the two pages, extract the tables separately and combine them later but this is trickier!
 </p>
-<pre class="r"><code>#join pre-2010 to post 2010
+<pre class="sourceCode r code-with-copy"><code>#join pre-2010 to post 2010
 death_page&lt;-death_page1
 death_page_child&lt;-death_page1 %&gt;% xml_children() %&gt;% .[2]
 death_page2_child&lt;-death_page2 %&gt;% xml_children() %&gt;% .[2]
@@ -229,7 +229,7 @@ death_page2_child&lt;-death_page2 %&gt;% xml_children() %&gt;% .[2]
 #page to the first.
 #This modifies death_page by changing the list of pointers associated with it.
 xml_add_sibling(death_page_child,death_page2_child)
-write_html(death_page,file="death_page.html")</code></pre>
+write_html(death_page,file="death_page.html")</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 </section>
 </section>
 <section id="clean-the-data." class="level1">
@@ -245,14 +245,14 @@ Here’s a data wrastlin’ puzzle. The artist and the band name (or names) shar
 <p>
 Parsing HTML is a dark art and I would not rise to the level of sorcerer’s apprentice. The clue that will let us separate the two (or more) identifiers is that the band is encased in a <code>&lt;small&gt;&lt;&gt;</code> tag within the <code>&lt;tr&gt;&lt;&gt;</code> tag that <code>html_table</code> looks for. Extracting the just the text from the cell concatenates the two items without a separator. The <code>rvest</code> functions won’t help this noob here. I chose to do old-school raw text editing with search/replace to break the person and the band into separate columns. So instead of <code>&lt;td&gt;Person&lt;small&gt;Band,Band&lt;&gt;&lt;&gt;</code> we want to have <code>&lt;td&gt;Person,Band,band&lt;&gt;</code>. This way we can separate out band names later.
 </p>
-<pre class="r"><code>#Crude hack follows
+<pre class="sourceCode r code-with-copy"><code>#Crude hack follows
 # read it in as a raw text file and edit the tags
 # to break the artist name and band names into comma-separated list
 # by replacing '&lt;small&gt;' with ','.
 death_page_text&lt;-read_file("death_page.html")
 death_page_text&lt;- gsub( "&lt;small&gt;", ", ", death_page_text )
 death_page_text&lt;- gsub( "&lt;/small&gt;", "", death_page_text )
-write_file(death_page_text,"death_page2.html")</code></pre>
+write_file(death_page_text,"death_page2.html")</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <p>
 A further wrinkle is some of the age-at-death numbers are given as a range like “45-46” which causes <code>html_table</code> to create a <code>character</code> column for <code>Age</code>. Tables that don’t have any ranges, just single numbers, will be extracted as <code>numeric</code> columns. We have many tables so We want to use <code>bind_rows</code> to combine all the web page tables into one data frame. Alas, <code>bind_rows</code> will balk at chaining columns of diferent types. To avoid this, let’s arbitrarily take the lowest number in any age range we find before binding. We can do this as part of the table extraction process.
 </p>
@@ -260,7 +260,7 @@ A further wrinkle is some of the age-at-death numbers are given as a range like 
 Also omit the first five tables which, by inspection, we know are not the mortality tables.
 </p>
 
-<pre class="r"><code># omit first five tables
+<pre class="sourceCode r code-with-copy"><code># omit first five tables
 deaths_raw&lt;-read_html("death_page2.html") %&gt;% 
   html_nodes("table") %&gt;% 
   .[5:length(.)] %&gt;% 
@@ -270,14 +270,14 @@ deaths_raw&lt;-read_html("death_page2.html") %&gt;%
   as_data_frame() %&gt;% 
   {.}
 
-deaths_raw[1:5,] %&gt;% kable(format.args=list(big.mark=","))</code></pre>
+deaths_raw[1:5,] %&gt;% kable(format.args=list(big.mark=","))</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <table class="table">
 <colgroup>
-<col style="width: 28%">
-<col style="width: 4%">
-<col style="width: 14%">
-<col style="width: 23%">
-<col style="width: 26%">
+<col style="width: 22%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -332,7 +332,7 @@ deaths_raw[1:5,] %&gt;% kable(format.args=list(big.mark=","))</code></pre>
 <p>
 Almost done with the boring bits. Separate out the list of name and bands into, at most, four bands. Turn the date string into a POSIX-style date. Replace the empty causes with “Not Specified.” Finally, strip the footnote numbers out of the file.
 </p>
-<pre class="r"><code>#take at most three band names.
+<pre class="sourceCode r code-with-copy"><code>#take at most three band names.
 deaths&lt;-deaths_raw %&gt;% 
   separate(Name,into=c("Name","band1","band2","band3","band4"),sep=",",extra="drop") %&gt;% 
   unique()
@@ -347,18 +347,18 @@ deaths&lt;-deaths %&gt;%
 deaths&lt;-deaths %&gt;% mutate(`Cause of death`=str_replace(`Cause of death`,"\\[[0-9,]+\\]",""))
 deaths&lt;-deaths %&gt;% mutate_cond(is.na(`Cause of death`),`Cause of death`="Not Specified")
 deaths&lt;-deaths %&gt;% mutate_cond(`Cause of death`=="",`Cause of death`="Not Specified")
-deaths[1:5,]%&gt;% kable(format.args=list(big.mark=","))</code></pre>
+deaths[1:5,]%&gt;% kable(format.args=list(big.mark=","))</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <table class="table">
 <colgroup>
-<col style="width: 14%">
 <col style="width: 11%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 4%">
-<col style="width: 8%">
-<col style="width: 20%">
-<col style="width: 19%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -439,12 +439,12 @@ Another Caveat
 <p>
 Now we have a clean table. Before going further we should note that death entries are growing over time. No great surprises here but but note that the in the early days of rock there were were few old rockers. We should keep this in the back of our mind as we proceed.
 </p>
-<pre class="r"><code>deaths&lt;-deaths %&gt;% mutate(Year=year(Date))
+<pre class="sourceCode r code-with-copy"><code>deaths&lt;-deaths %&gt;% mutate(Year=year(Date))
 
 deaths %&gt;%  
   group_by(Year) %&gt;% 
   summarise(Entries=n()) %&gt;%
-  ggplot(aes(Year,Entries))+geom_col()</code></pre>
+  ggplot(aes(Year,Entries))+geom_col()</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/unnamed-chunk-8-1.png" class="img-fluid figure-img"></p>
@@ -457,18 +457,14 @@ deaths %&gt;%
 Let’s do a quick exploration to see if we are satisfied with the features of our data set.
 </p>
 
-<pre class="r"><code>#what are common causes of death
+<pre class="sourceCode r code-with-copy"><code>#what are common causes of death
 cause_table&lt;-deaths %&gt;% 
   group_by(`Cause of death`) %&gt;% 
   summarize(Cause=n()) %&gt;% 
   arrange(desc(Cause))
 
-cause_table[1:11,]%&gt;% kable(format.args=list(big.mark=","))</code></pre>
+cause_table[1:11,]%&gt;% kable(format.args=list(big.mark=","))</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <table class="table">
-<colgroup>
-<col style="width: 26%">
-<col style="width: 11%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Cause of death</th>
@@ -525,7 +521,7 @@ cause_table[1:11,]%&gt;% kable(format.args=list(big.mark=","))</code></pre>
 <p>
 Looking through the table we see that many causes can be generalized. Let’s aggregate a bit. We are making some choices here. For instance, I call any cause containing the words “heart” or “cardiac” as “heart disease.” I count alcohol as a drug. Where multiple terms exist, drugs trump accidents. Suicide trumps everthing but cancer. Cancer trumps everthing. Note the use of the very handy <code>mutate_cond</code> function.
 </p>
-<pre class="r"><code>#add a new column "general cause"
+<pre class="sourceCode r code-with-copy"><code>#add a new column "general cause"
 deaths&lt;-deaths %&gt;% mutate(General_Cause=`Cause of death`)
 
 deaths&lt;-deaths %&gt;% 
@@ -573,12 +569,12 @@ deaths&lt;-deaths %&gt;%
                 !str_detect(`Cause of death`,"tomach|coma"),
               General_Cause="Cancer")
 deaths&lt;-deaths %&gt;% 
-  mutate_cond(str_detect(tolower(`Cause of death`),"cancer|tumor"),General_Cause="Cancer")</code></pre>
+  mutate_cond(str_detect(tolower(`Cause of death`),"cancer|tumor"),General_Cause="Cancer")</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <p>
 Further aggregate causes. Arbitrarily, label the general cause of any cause below the top 15 as “Other.”
 </p>
 
-<pre class="r"><code>cause_table&lt;-deaths %&gt;% 
+<pre class="sourceCode r code-with-copy"><code>cause_table&lt;-deaths %&gt;% 
   count(General_Cause) %&gt;% 
   arrange(desc(n)) %&gt;% 
   rename(Rockers=n)
@@ -605,7 +601,7 @@ save(deaths,file='deaths.rdata')
 gg&lt;-cause_table[1:12,]  %&gt;% 
   ggplot(aes(General_Cause,Rockers))+geom_col()
 gg&lt;-gg+coord_flip()
-gg</code></pre>
+gg</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <p></p>
 <p><img src="img/unnamed-chunk-11-1.png" class="img-fluid"></p>
 <p>
@@ -614,17 +610,13 @@ NOW, we are done with all the data wrangling and can get to the (morbid) fun stu
 <p>
 This gives us a decent picture of how rock stars die. Mostly from the same things that kill all of us. Heart disease and cancer were the leading causes of death in US in 2015, followed by lung disease and accidents according to <a href="https://www.cdc.gov/nchs/fastats/deaths.htm" class="uri">https://www.cdc.gov/nchs/fastats/deaths.htm</a> and shown below.
 </p>
-<pre class="r"><code>us_deaths&lt;-data_frame(General_Cause=as_factor(c('Heart Disease','Cancer',
+<pre class="sourceCode r code-with-copy"><code>us_deaths&lt;-data_frame(General_Cause=as_factor(c('Heart Disease','Cancer',
                                       'Lung Disease','Accident','Stroke',
                                       'Alzheimers','Diabetes','Liver Disease',
                                       'Suicide','Murdered','Other')),
                       US=c(633842,595930,212103,146571,140323,110561,79535,49959,44193,15696,683917))
-us_deaths %&gt;% kable(format.args=list(big.mark=","))</code></pre>
+us_deaths %&gt;% kable(format.args=list(big.mark=","))</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <table class="table">
-<colgroup>
-<col style="width: 22%">
-<col style="width: 13%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>General_Cause</th>
@@ -714,7 +706,7 @@ Live fast?
 While the big killers are the same for both populations, is there evidence that rockers “live fast?” Yes, it turns out.
 </p>
 
-<pre class="r"><code># we assume the CDC calls drug overdoses an accident so we will too.
+<pre class="sourceCode r code-with-copy"><code># we assume the CDC calls drug overdoses an accident so we will too.
 comp_deaths&lt;-cause_table %&gt;% 
   mutate_cond(General_Cause=="Drugs",General_Cause="Accident") %&gt;% 
   group_by(General_Cause) %&gt;% 
@@ -732,7 +724,7 @@ gg&lt;-gg+labs(title="Rock Stars are (Almost) Like the Rest of US\nProportion of
 y='Rock Music Deaths (1950-Present)',x='US Deaths (2015)')
 gg&lt;-gg+scale_x_continuous(labels=scales::percent)
 gg&lt;-gg+scale_y_continuous(labels=scales::percent)
-gg</code></pre>
+gg</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <p><img src="img/unnamed-chunk-13-1.png" class="img-fluid"></p>
 <p>
 This scatter plot shows the preponderance of rock musician deaths relative to the broader US population. Where the points lie above the line it means rock musicians die of that cause more often than the overall US population. We can see that suicide, murder and, especially, accidents account for more relative deaths than they do in the broader population. Cancer seems more prevalent, too. We can’t know, but might suspect, this due to behavioral factors like smoking.
@@ -746,7 +738,7 @@ Die Young?
 We’ve <code>&lt;grin&gt;</code>scientifically proven<code>&lt;/grin&gt;</code> that rock stars “live fast.” Do they die young? Life expectancies have grown over the years so taking an aggregate average age at death going back to 1950 won’t be comprable to current US life expectancy. To get a comparison let’s pull the data from the <code>gapminder</code> package. This shows life expectancy at birth as opposed to average age at death, which is what our data set has now. We have to get a bit tricky to make the numbers comparable by taking <code>date</code> minus <code>Age</code> to get <code>birth_year</code>. We take the gapminder life expectancy for <code>birth_year</code> and compare that to <code>Age</code> at death. The earliest birth years in our data are much earlier than what the gapminder set covers so we need to extrapolate the data, as well. If we were doing REAL data science we would find a better mortality data set, but this is OUTSIDER data science! We keep it simple.
 </p>
 
-<pre class="r"><code>#Add birth year column.
+<pre class="sourceCode r code-with-copy"><code>#Add birth year column.
 deaths&lt;-deaths %&gt;% mutate(birth_year=year(Date)-Age)
 
 #Create extrapolation of gapminder life expectancy using the full range of birth
@@ -763,7 +755,7 @@ life_exp$expected_longevity&lt;-predict(p,life_exp)
 
 #how well does this fit the data?
 life_exp %&gt;% ggplot(aes(birth_year,expected_longevity))+geom_line()+geom_point(aes(y=lifeExp))+
-  labs(title="Gapminder U.S. Life Expectancy at Birth, Extrapolated",y="Life Expectancy",x="Birth Year")</code></pre>
+  labs(title="Gapminder U.S. Life Expectancy at Birth, Extrapolated",y="Life Expectancy",x="Birth Year")</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <p>
 <img src="img/unnamed-chunk-14-1.png" class="img-fluid">
 </p>
@@ -779,7 +771,7 @@ The plot below shows how the average age at death has changed over the years for
 <p>
 Plotting note: I am not using “tidy”” data here so I roll some intersting g-g-jitsu to get the legends nice. The musician data and the U.S. population data are in separate columns so they get plotted with separate <code>geom_line</code> aesthetics. We could use <code>gather</code> to make the data tidy but that would complicate taking the difference to show the <code>gap</code> series. This data formate makes it easy to just put it in a new column.
 </p>
-<pre class="r"><code>#merge deaths with life expectancy for the relevant birth year.  Determine
+<pre class="sourceCode r code-with-copy"><code>#merge deaths with life expectancy for the relevant birth year.  Determine
 #whether they died "young"  or outlived expectations.
 deaths &lt;- deaths %&gt;% 
   left_join(life_exp) %&gt;% 
@@ -803,7 +795,7 @@ gg&lt;-gg+labs(title="Rock Stars Don't Die Young Anymore\nRocker Death Age vs. U
 gg&lt;-gg+ scale_colour_manual(name = 'Lines', 
          values =c('black'='black','red'='red'), labels = c('US Pop.(expected)',"Rockers (actual)"))
 gg&lt;-gg+ scale_fill_identity(name = 'Bars', guide = 'legend',labels = c('Gap'))
-gg</code></pre>
+gg</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <p>
 <img src="img/unnamed-chunk-15-1.png" class="img-fluid">
 </p>
@@ -816,7 +808,7 @@ Be careful, though. Remember what we observed above. In the early days of rock, 
 <p>
 Aww, heck with it. Let’s show the tidyverse way to roll this. Start from the <code>death_age</code> table we created above. Tidyfy it with <code>gather</code>, then plot.
 </p>
-<pre class="r"><code>gg&lt;-death_age %&gt;% gather(key="cohort",value="death_age",-Year) %&gt;% 
+<pre class="sourceCode r code-with-copy"><code>gg&lt;-death_age %&gt;% gather(key="cohort",value="death_age",-Year) %&gt;% 
   ggplot(aes(Year,death_age,color=cohort))+geom_line()+geom_hline(yintercept = 0)
 gg&lt;-gg+labs(title="Rock Stars Don't Die Young Anymore\nRocker Death Age vs. U.S. Population",
             y="Average Age At Death",
@@ -825,7 +817,7 @@ gg&lt;-gg+labs(title="Rock Stars Don't Die Young Anymore\nRocker Death Age vs. U
 gg&lt;-gg+ scale_colour_manual(name="",
                             values =c('blue','red',"black"),
                             labels = c('Gap',"Rockers",'US Pop.(expected)'))
-gg</code></pre>
+gg</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <p>
 <img src="img/unnamed-chunk-16-1.png" class="img-fluid">
 </p>
@@ -843,7 +835,7 @@ Stay pretty? The “27 Club.”
 <p>
 We’ll plot the number of deaths by age and highlight 27. Create the highlight by making a vector, <code>fills</code>, that specifies the color of each bar in advance. At first glance, creating <code>fills</code> seems overly complicated. It’s slightly tricky since not all ages have deaths so a consecutive series won’t work.
 </p>
-<pre class="r"><code>highlight=27
+<pre class="sourceCode r code-with-copy"><code>highlight=27
 # the code below creates the list of colors for plot bars, making just one red.
 # I suspect I am making this harder than it needs to be.
 fills&lt;-deaths %&gt;% 
@@ -858,23 +850,19 @@ fills&lt;-deaths %&gt;%
 gg&lt;-deaths %&gt;% ggplot(aes(Age))+geom_bar(fill=fills)
 gg&lt;-gg+labs(title="Rock Musician Age of Death (1950-2017)",y="Count")
 gg&lt;-gg+annotate("text",x=27,y=55,label="Age 27",size=8)
-gg</code></pre>
+gg</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <p>
 <img src="img/unnamed-chunk-17-1.png" class="img-fluid">
 </p>
 <p>
 Well, well, well. It turns out that 27 IS a risky age! Optically, it looks like about double the mortality we might otherwise expect. We always have to be wary of carts leading horses, though. Perhaps the folks who are interested in the topic are more than usually dilligent in finding examples and adding them to the Wikipedia page. Still, it’s fascinating. Why do 27-year olds die? You already know the answer.
 </p>
-<pre class="r"><code>deaths %&gt;% filter(Age==highlight) %&gt;% 
+<pre class="sourceCode r code-with-copy"><code>deaths %&gt;% filter(Age==highlight) %&gt;% 
   group_by(General_Cause) %&gt;% 
   summarise(Count=n()) %&gt;%
   arrange(desc(Count))%&gt;% 
-  kable(format.args=list(big.mark=","))</code></pre>
+  kable(format.args=list(big.mark=","))</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <table class="table">
-<colgroup>
-<col style="width: 22%">
-<col style="width: 11%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>General_Cause</th>
@@ -933,7 +921,7 @@ How do causes of death change as rock musicians age? For this we’ll use a <cod
 <p>
 If we assume “Not Specified” deaths are in proportion to the reported causes, we can filter it it out get a clearer picture.
 </p>
-<pre class="r"><code>#cut off below 21 and above 85 because the data gets pretty thin
+<pre class="sourceCode r code-with-copy"><code>#cut off below 21 and above 85 because the data gets pretty thin
 gg&lt;-deaths %&gt;%  
   filter(General_Cause != "Not Specified") %&gt;% 
   filter(Age &gt;21,Age&lt;86) %&gt;% 
@@ -946,7 +934,7 @@ gg&lt;-gg+theme(panel.background = element_blank(),
 #make a palette for 15 categories with good color separation
 pal&lt;-c(brewer.pal(12,"Set3"),brewer.pal(3,"Set2"))
 gg&lt;-gg+scale_fill_manual(values=pal)
-gg</code></pre>
+gg</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <p>
 <img src="img/unnamed-chunk-19-1.png" class="img-fluid">
 </p>
@@ -961,7 +949,7 @@ A couple more questions suggested by our discoveries.
 <p>
 Note the emergence and disappearance of AIDS as a cause of death from people in their late 20s to 50. Is this a function of just the 80s and 90s when AIDS was a particular scourge? Is it now a chronic, manageable, condition so that it won’t be a frequent cause of death any more? Let’s look at the number of reported AIDS deaths by year.
 </p>
-<pre class="r"><code>deaths %&gt;% filter(General_Cause=="AIDS") %&gt;% ggplot(aes(Year))+geom_bar()</code></pre>
+<pre class="sourceCode r code-with-copy"><code>deaths %&gt;% filter(General_Cause=="AIDS") %&gt;% ggplot(aes(Year))+geom_bar()</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <p>
 <img src="img/unnamed-chunk-20-1.png" class="img-fluid">
 </p>
@@ -971,7 +959,7 @@ There are so few instances of AIDS deaths that we can’t be confident of our hy
 <p>
 Finally, let’s use this data to question our “live fast” assertion from above. We know deaths from all causes rise with age. Maybe the asbsolute number of accidental deaths stays the same (or even rises) but just goes down relative to other causes common to all geezers. As a reality check, let’s ask if the absolute number changes with age.
 </p>
-<pre class="r"><code>gg&lt;-deaths  %&gt;% 
+<pre class="sourceCode r code-with-copy"><code>gg&lt;-deaths  %&gt;% 
   ggplot(aes(Age,fill="grey"))+geom_histogram(bins=10)
 gg&lt;-gg+labs(title='Number of Reported Deaths by Accident, by Age',
             x='Age at Death',
@@ -982,7 +970,7 @@ gg&lt;-gg+geom_histogram(data=filter(deaths,General_Cause=="Accident"),
 gg&lt;-gg+ scale_fill_manual(name='',
                           values =c('grey'='grey','black'='black'),
                           labels = c('Accident','All Causes'))
-gg</code></pre>
+gg</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre>
 <p>
 <img src="img/unnamed-chunk-21-1.png" class="img-fluid">
 </p>
