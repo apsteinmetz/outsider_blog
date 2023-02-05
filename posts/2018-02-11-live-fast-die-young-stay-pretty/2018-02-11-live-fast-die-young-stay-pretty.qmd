@@ -10,6 +10,8 @@ tags:
   - web scraping
   - health
   - gapminder
+execute: 
+  freeze: true
 ---
 
 ::: {#analyzing-deaths-of-rock-musicians .section .level2}

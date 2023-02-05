@@ -2,6 +2,7 @@
 title: "outsider_blog"
 listing: 
   contents: posts
+  sort: "date desc"
   type: default
 ---
 

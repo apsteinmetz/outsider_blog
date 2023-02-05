@@ -1,5 +1,13 @@
 ---
 title: "Switching to Quarto from Blogdown"
+author: Art Steinmetz
+date: '2022-01-24'
+slug: Switching to Quarto from Blogdown
+categories:
+  - R
+tags:
+  - quarto
+  - blogging
 ---
 
 1.  Create subfolder in our 'posts' folder to hold converted file. Use any name but I like the form *yyyy-mm-dd_name-of-post*.
