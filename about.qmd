@@ -1,6 +1,24 @@
 ---
-title: "About"
-author: "Art Steinmetz"
+title: "Art Steinmetz"
+about: 
+  template: trestles
+  image: "img/headshot.jpg"
+  image-width: "150px"
+  links:
+    - text: LinkedIn
+      icon: linkedin
+      url: "https://www.linkedin.com/in/asteinmetz/"
+    - text: Twitter
+      icon: twitter
+      url: "https://twitter.com/adababbage"
+    - text: Mastodon
+      icon: mastodon
+      url: "https://fosstodon.org/@adababbage"
+    - text: GitHub
+      icon: github
+      url: "https://github.com/apsteinmetz"
+    - text: Email
+      url: "mailto:apsteinmetz@yahoo.com"
 ---
 
 ![July Fourth by Grandma Moses](img/july-fourth.jpg)
@@ -17,4 +35,3 @@ I used to work at OppenheimerFunds Inc. before it was acquired by Invesco, first
 
 -   Art Steinmetz
 
-email: apsteinmetz\@yahoo.com

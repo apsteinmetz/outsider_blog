@@ -5,18 +5,21 @@ website:
   title: "Outsider Data Science"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - text: Blog
+        file: index.qmd
+      - text: About
+        file: about.qmd
 
 format:
   html:
-    theme: spacelab
+    theme:
+      light: spacelab
+      dark: darkly
     css: styles.css
     toc: true
     code-block-bg: true
     code-block-border-left: "#31BAE9"
 
 editor: source
-freeze: true
+freeze: auto
 
