@@ -4,8 +4,6 @@ author: Art Steinmetz
 date: '2018-02-26'
 slug: new-winter-sports-for-new-countries
 categories:
-  - R
-tags:
   - web scraping
   - sports
 ---

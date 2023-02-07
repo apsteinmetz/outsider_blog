@@ -4,8 +4,6 @@ author: Art Steinmetz
 date: '2022-01-24'
 slug: Switching to Quarto from Blogdown
 categories:
-  - R
-tags:
   - quarto
   - blogging
 ---
@@ -16,6 +14,8 @@ tags:
 4.  Copy old rendered HTML document (not the RMD markdown document) to the new folder.
 5.  Rename copied HTML file from *\<filename\>.html* to *\<filename\>.qmd*.
 6.  Load QMD file into RStudio.
-7.  Search/Replace all instances of \`class="r"\` to \`class="sourceCode r"\`.
-8.  Fix path names of any image files to point to the 'img' folder.
-9.  Save and Render. Done!
+7.  Change YAML header 'tags' to 'categories.'
+8.  Search/Replace all instances of \`class="r"\` to \`class="sourceCode r"\`.
+9.  Fix path names of any image files to point to the 'img' folder.
+10. Copy rmarkdown-libs folder with any HTML widgets. Plotly Javascript will be be here.
+11. Save and Render. Done!

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Outsider Data Science - outsider_blog</title>
+<title>Outsider Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,69 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -133,9 +70,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -194,13 +131,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(13)</span></div><div class="category" data-category="COVID">COVID <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Excel">Excel <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="blogging">blogging <span class="quarto-category-count">(1)</span></div><div class="category" data-category="clustering">clustering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="education">education <span class="quarto-category-count">(1)</span></div><div class="category" data-category="facebook">facebook <span class="quarto-category-count">(1)</span></div><div class="category" data-category="gapminder">gapminder <span class="quarto-category-count">(1)</span></div><div class="category" data-category="gender">gender <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ggplot2">ggplot2 <span class="quarto-category-count">(3)</span></div><div class="category" data-category="github">github <span class="quarto-category-count">(1)</span></div><div class="category" data-category="health">health <span class="quarto-category-count">(1)</span></div><div class="category" data-category="maps">maps <span class="quarto-category-count">(1)</span></div><div class="category" data-category="music">music <span class="quarto-category-count">(2)</span></div><div class="category" data-category="palettes">palettes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="plotly">plotly <span class="quarto-category-count">(1)</span></div><div class="category" data-category="politics">politics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="puzzle">puzzle <span class="quarto-category-count">(1)</span></div><div class="category" data-category="quarto">quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="recursion">recursion <span class="quarto-category-count">(1)</span></div><div class="category" data-category="rick and morty">rick and morty <span class="quarto-category-count">(1)</span></div><div class="category" data-category="sports">sports <span class="quarto-category-count">(1)</span></div><div class="category" data-category="tax">tax <span class="quarto-category-count">(1)</span></div><div class="category" data-category="text mining">text mining <span class="quarto-category-count">(1)</span></div><div class="category" data-category="tidymodels">tidymodels <span class="quarto-category-count">(1)</span></div><div class="category" data-category="tidytext">tidytext <span class="quarto-category-count">(1)</span></div><div class="category" data-category="tidyverse">tidyverse <span class="quarto-category-count">(1)</span></div><div class="category" data-category="web scraping">web scraping <span class="quarto-category-count">(3)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">outsider_blog</h1>
+<h1 class="title">Outsider Data Science</h1>
 </div>
 
 
@@ -215,21 +152,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>This is a Quarto website.</p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
+<p>Putting what’s in there, out there. With <img src="img/R_logo.svg.png" class="img-fluid"></p>
 
 
 
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="R" data-listing-date-sort="1643000400000" data-listing-file-modified-sort="1675617100198" data-listing-reading-time-sort="0.53">
+<div class="quarto-post image-right" data-index="0" data-categories="quarto,blogging" data-listing-date-sort="1643000400000" data-listing-file-modified-sort="1675725061035" data-listing-reading-time-sort="0.625">
 <div class="thumbnail">
 <a href="./posts/2023-01-24_Switching-to-Quarto/2023-1-24_switching-to-quarto.html">
 <div class="thumbnail-image">
@@ -245,6 +175,16 @@ Switching to Quarto from Blogdown
 <div class="listing-subtitle">
 
 </div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('quarto'); return false;">
+quarto
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('blogging'); return false;">
+blogging
+</div>
+</div>
+<a href="./posts/2023-01-24_Switching-to-Quarto/2023-1-24_switching-to-quarto.html">
 <div class="listing-description">
 
 </div>
@@ -261,13 +201,289 @@ Art Steinmetz
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="R" data-listing-date-sort="1549256400000" data-listing-file-modified-sort="1675635639759" data-listing-reading-time-sort="8.545">
+<div class="quarto-post image-right" data-index="1" data-categories="ggplot2,tidymodels,tidyverse,COVID" data-listing-date-sort="1607230800000" data-listing-file-modified-sort="1675725088486" data-listing-reading-time-sort="26.93">
 <div class="thumbnail">
-<a href="./posts/2019-02-04-rick-and-morty-palettes/2019-02-04-rick-and-morty-palettes.html">
-<div class="thumbnail-image">
+<p><a href="./posts/2020-12-06-covid-cases-vs-deaths/2020-12-06-covid-cases-vs-deaths.html"> <img src="./posts/2020-12-06-covid-cases-vs-deaths/img/unnamed-chunk-2-1.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2020-12-06-covid-cases-vs-deaths/2020-12-06-covid-cases-vs-deaths.html">
+<h3 class="no-anchor listing-title">
+Covid Cases vs.&nbsp;Deaths
+</h3>
+<div class="listing-subtitle">
 
 </div>
-</a><p><a href="./posts/2019-02-04-rick-and-morty-palettes/2019-02-04-rick-and-morty-palettes.html"></a></p>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('ggplot2'); return false;">
+ggplot2
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('tidymodels'); return false;">
+tidymodels
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('tidyverse'); return false;">
+tidyverse
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('COVID'); return false;">
+COVID
+</div>
+</div>
+<a href="./posts/2020-12-06-covid-cases-vs-deaths/2020-12-06-covid-cases-vs-deaths.html">
+<div class="listing-description">
+<p>Estimate the average lag between a positive COVID-19 case and a death.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2020-12-06-covid-cases-vs-deaths/2020-12-06-covid-cases-vs-deaths.html">
+<div class="listing-date">
+Dec 6, 2020
+</div>
+<div class="listing-author">
+Art Steinmetz
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="ggplot2,tidytext,music" data-listing-date-sort="1579064400000" data-listing-file-modified-sort="1675725119744" data-listing-reading-time-sort="23.07">
+<div class="thumbnail">
+<p><a href="./posts/2020-01-15-what-do-the-ramones-want/2020-01-15-what-do-the-ramones-want.html"> <img src="./posts/2020-01-15-what-do-the-ramones-want/img/Wants4thEdition.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2020-01-15-what-do-the-ramones-want/2020-01-15-what-do-the-ramones-want.html">
+<h3 class="no-anchor listing-title">
+What Do The Ramones Want?
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('ggplot2'); return false;">
+ggplot2
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('tidytext'); return false;">
+tidytext
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('music'); return false;">
+music
+</div>
+</div>
+<a href="./posts/2020-01-15-what-do-the-ramones-want/2020-01-15-what-do-the-ramones-want.html">
+<div class="listing-description">
+
+Recently I saw a tweet that shared this hilarious poster of Ramones “wants”.  Dan Gneiding (aka Grayhood) is the graphic designer who created this. You can buy it here
+
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2020-01-15-what-do-the-ramones-want/2020-01-15-what-do-the-ramones-want.html">
+<div class="listing-date">
+Jan 15, 2020
+</div>
+<div class="listing-author">
+Art Steinmetz
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="tax,plotly" data-listing-date-sort="1575781200000" data-listing-file-modified-sort="1675725199152" data-listing-reading-time-sort="7.96">
+<div class="thumbnail">
+<p><a href="./posts/2019-12-08-state-taxes-it-s-not-just-about-income/2019-12-08-state-taxes-it-s-not-just-about-income.html"> <img src="./posts/2019-12-08-state-taxes-it-s-not-just-about-income/img/thumbnail.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2019-12-08-state-taxes-it-s-not-just-about-income/2019-12-08-state-taxes-it-s-not-just-about-income.html">
+<h3 class="no-anchor listing-title">
+State Taxes: It’s not just about Income
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('tax'); return false;">
+tax
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('plotly'); return false;">
+plotly
+</div>
+</div>
+<a href="./posts/2019-12-08-state-taxes-it-s-not-just-about-income/2019-12-08-state-taxes-it-s-not-just-about-income.html">
+<div class="listing-description">
+Much of the discussion around tax burdens focuses on income taxes but, at the state level, that leaves out two other big sources of tax liability, sales and property taxes.…<code></code>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2019-12-08-state-taxes-it-s-not-just-about-income/2019-12-08-state-taxes-it-s-not-just-about-income.html">
+<div class="listing-date">
+Dec 8, 2019
+</div>
+<div class="listing-author">
+Art Steinmetz
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="github,gender" data-listing-date-sort="1563249600000" data-listing-file-modified-sort="1675725213462" data-listing-reading-time-sort="21.48">
+<div class="thumbnail">
+<p><a href="./posts/2019-07-16-gender-diversity-in-r-and-python-package-contributors/2019-07-16-gender-diversity-in-r-and-python-package-contributors.html"> <img src="./posts/2019-07-16-gender-diversity-in-r-and-python-package-contributors/img/unnamed-chunk-13-1.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2019-07-16-gender-diversity-in-r-and-python-package-contributors/2019-07-16-gender-diversity-in-r-and-python-package-contributors.html">
+<h3 class="no-anchor listing-title">
+Gender Diversity in R and Python Package Contributors
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('github'); return false;">
+github
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('gender'); return false;">
+gender
+</div>
+</div>
+<a href="./posts/2019-07-16-gender-diversity-in-r-and-python-package-contributors/2019-07-16-gender-diversity-in-r-and-python-package-contributors.html">
+<div class="listing-description">
+
+Over the last few years I have really enjoyed becoming part of the R community. One of the best things about the community is the welcoming, inclusive and supportive nature…
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2019-07-16-gender-diversity-in-r-and-python-package-contributors/2019-07-16-gender-diversity-in-r-and-python-package-contributors.html">
+<div class="listing-date">
+Jul 16, 2019
+</div>
+<div class="listing-author">
+Art Steinmetz
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="R,Excel" data-listing-date-sort="1560312000000" data-listing-file-modified-sort="1675726416295" data-listing-reading-time-sort="4.88">
+<div class="thumbnail">
+<p><a href="./posts/2019-06-12-why-i-migrated-from-excel-to-r/2019-06-12-why-i-migrated-from-excel-to-r.html"> <img src="./posts/2019-06-12-why-i-migrated-from-excel-to-r/img/spreadsheet_mosaic.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2019-06-12-why-i-migrated-from-excel-to-r/2019-06-12-why-i-migrated-from-excel-to-r.html">
+<h3 class="no-anchor listing-title">
+Why I migrated from Excel to R
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Excel'); return false;">
+Excel
+</div>
+</div>
+<a href="./posts/2019-06-12-why-i-migrated-from-excel-to-r/2019-06-12-why-i-migrated-from-excel-to-r.html">
+<div class="listing-description">
+I’ve been a spreadsheet power user from the days of Visicalc for the Apple ][. I migrated to Lotus 1-2-3, to…
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2019-06-12-why-i-migrated-from-excel-to-r/2019-06-12-why-i-migrated-from-excel-to-r.html">
+<div class="listing-date">
+Jun 12, 2019
+</div>
+<div class="listing-author">
+Art Steinmetz
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="puzzle,recursion" data-listing-date-sort="1555387200000" data-listing-file-modified-sort="1675725234958" data-listing-reading-time-sort="19.815">
+<div class="thumbnail">
+<p><a href="./posts/2019-04-16-solving-the-letterboxed-puzzle-in-the-new-york-times/2019-04-16-solving-the-letterboxed-puzzle-in-the-new-york-times.html"> <img src="./posts/2019-04-16-solving-the-letterboxed-puzzle-in-the-new-york-times/img/sample_board.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2019-04-16-solving-the-letterboxed-puzzle-in-the-new-york-times/2019-04-16-solving-the-letterboxed-puzzle-in-the-new-york-times.html">
+<h3 class="no-anchor listing-title">
+Solving the Letterboxed Puzzle in the New York Times
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('puzzle'); return false;">
+puzzle
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('recursion'); return false;">
+recursion
+</div>
+</div>
+<a href="./posts/2019-04-16-solving-the-letterboxed-puzzle-in-the-new-york-times/2019-04-16-solving-the-letterboxed-puzzle-in-the-new-york-times.html">
+<div class="listing-description">
+
+What is the difference between “computer programming” and “data science?” To someone not invovled in either they look much the same. Most data scientists are also coders…
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2019-04-16-solving-the-letterboxed-puzzle-in-the-new-york-times/2019-04-16-solving-the-letterboxed-puzzle-in-the-new-york-times.html">
+<div class="listing-date">
+Apr 16, 2019
+</div>
+<div class="listing-author">
+Arthur Steinmetz
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-categories="politics,ggplot2" data-listing-date-sort="1549515600000" data-listing-file-modified-sort="1675725250490" data-listing-reading-time-sort="32.775">
+<div class="thumbnail">
+<p><a href="./posts/2019-02-07-where-are-the-libertarians/2019-02-07-where-are-the-libertarians.html"> <img src="./posts/2019-02-07-where-are-the-libertarians/img/unnamed-chunk-18-1.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2019-02-07-where-are-the-libertarians/2019-02-07-where-are-the-libertarians.html">
+<h3 class="no-anchor listing-title">
+Where Are The Libertarians?
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('politics'); return false;">
+politics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ggplot2'); return false;">
+ggplot2
+</div>
+</div>
+<a href="./posts/2019-02-07-where-are-the-libertarians/2019-02-07-where-are-the-libertarians.html">
+<div class="listing-description">
+
+At the risk of losing half my readers in the first paragraph, I’ll share my political views. Generally, I believe in “free people and free markets.” That makes me a small-L…
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2019-02-07-where-are-the-libertarians/2019-02-07-where-are-the-libertarians.html">
+<div class="listing-date">
+Feb 7, 2019
+</div>
+<div class="listing-author">
+Art Steinmetz
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-categories="clustering,rick and morty,palettes" data-listing-date-sort="1549256400000" data-listing-file-modified-sort="1675725276440" data-listing-reading-time-sort="8.545">
+<div class="thumbnail">
+<p><a href="./posts/2019-02-04-rick-and-morty-palettes/2019-02-04-rick-and-morty-palettes.html"> <img src="./posts/2019-02-04-rick-and-morty-palettes/img/rm2.jpg" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="./posts/2019-02-04-rick-and-morty-palettes/2019-02-04-rick-and-morty-palettes.html">
@@ -277,6 +493,19 @@ Rick and Morty Palettes
 <div class="listing-subtitle">
 
 </div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('clustering'); return false;">
+clustering
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('rick and morty'); return false;">
+rick and morty
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('palettes'); return false;">
+palettes
+</div>
+</div>
+<a href="./posts/2019-02-04-rick-and-morty-palettes/2019-02-04-rick-and-morty-palettes.html">
 <div class="listing-description">
 
 This was just a fun morning exercise. Let’s mix multiple images to make…<code></code>
@@ -294,13 +523,9 @@ Art Steinmetz
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="R" data-listing-date-sort="1543467600000" data-listing-file-modified-sort="1675633060293" data-listing-reading-time-sort="19.795">
+<div class="quarto-post image-right" data-index="9" data-categories="web scraping,education,maps" data-listing-date-sort="1543467600000" data-listing-file-modified-sort="1675725296164" data-listing-reading-time-sort="19.795">
 <div class="thumbnail">
-<a href="./posts/2018-11-29-is-free-pre-k-in-nyc-favoring-the-rich/2018-11-29-is-free-pre-k-in-nyc-favoring-the-rich.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./posts/2018-11-29-is-free-pre-k-in-nyc-favoring-the-rich/2018-11-29-is-free-pre-k-in-nyc-favoring-the-rich.html"></a></p>
+<p><a href="./posts/2018-11-29-is-free-pre-k-in-nyc-favoring-the-rich/2018-11-29-is-free-pre-k-in-nyc-favoring-the-rich.html"> <img src="./posts/2018-11-29-is-free-pre-k-in-nyc-favoring-the-rich/img/unnamed-chunk-23-1.png" class="thumnail-image"> </a></p>
 </div>
 <div class="body">
 <a href="./posts/2018-11-29-is-free-pre-k-in-nyc-favoring-the-rich/2018-11-29-is-free-pre-k-in-nyc-favoring-the-rich.html">
@@ -310,6 +535,19 @@ Is Free Pre-K in NYC Favoring the Rich?
 <div class="listing-subtitle">
 
 </div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('web scraping'); return false;">
+web scraping
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('education'); return false;">
+education
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('maps'); return false;">
+maps
+</div>
+</div>
+<a href="./posts/2018-11-29-is-free-pre-k-in-nyc-favoring-the-rich/2018-11-29-is-free-pre-k-in-nyc-favoring-the-rich.html">
 <div class="listing-description">
 
 A hallmark of mayoral administration of NYC Mayor Bill DeBlasio has been free pre-K for all New York families. When the program was initially rolled out there were complaints in some quarters that upper-income neighborhoods were…
@@ -327,7 +565,7 @@ Art Steinmetz
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="R" data-listing-date-sort="1519621200000" data-listing-file-modified-sort="1675372486597" data-listing-reading-time-sort="7.08">
+<div class="quarto-post image-right" data-index="10" data-categories="web scraping,sports" data-listing-date-sort="1519621200000" data-listing-file-modified-sort="1675725316564" data-listing-reading-time-sort="7.08">
 <div class="thumbnail">
 <p><a href="./posts/2018-02-26-new-winter-sports-for-new-countries/2018-02-26-new-winter-sports-for-new-countries.html"> <img src="./posts/2018-02-26-new-winter-sports-for-new-countries/img/unnamed-chunk-6-1.png" class="thumnail-image"> </a></p>
 </div>
@@ -339,6 +577,16 @@ New Winter Sports for New Countries
 <div class="listing-subtitle">
 
 </div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('web scraping'); return false;">
+web scraping
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('sports'); return false;">
+sports
+</div>
+</div>
+<a href="./posts/2018-02-26-new-winter-sports-for-new-countries/2018-02-26-new-winter-sports-for-new-countries.html">
 <div class="listing-description">
 
 Norway is a tiny country that punches way above its weight in the Winter Olympic medal count. We are not surprised as those folks are practically born on skis. At the same…
@@ -356,7 +604,7 @@ Art Steinmetz
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="R" data-listing-date-sort="1518325200000" data-listing-file-modified-sort="1675617369352" data-listing-reading-time-sort="27.175">
+<div class="quarto-post image-right" data-index="11" data-categories="music,web scraping,health,gapminder" data-listing-date-sort="1518325200000" data-listing-file-modified-sort="1675724824963" data-listing-reading-time-sort="27.175">
 <div class="thumbnail">
 <p><a href="./posts/2018-02-11-live-fast-die-young-stay-pretty/2018-02-11-live-fast-die-young-stay-pretty.html"> <img src="./posts/2018-02-11-live-fast-die-young-stay-pretty/img/unnamed-chunk-8-1.png" class="thumnail-image"> </a></p>
 </div>
@@ -368,6 +616,22 @@ Live Fast, Die Young, Stay Pretty?
 <div class="listing-subtitle">
 
 </div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('music'); return false;">
+music
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('web scraping'); return false;">
+web scraping
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('health'); return false;">
+health
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('gapminder'); return false;">
+gapminder
+</div>
+</div>
+<a href="./posts/2018-02-11-live-fast-die-young-stay-pretty/2018-02-11-live-fast-die-young-stay-pretty.html">
 <div class="listing-description">
 
 Live fast, die young, stay pretty? That’s the stereotype for rockers, or it was. We only need to look at Keith Richards, over 70 and going strong, to find a major…
@@ -385,7 +649,7 @@ Art Steinmetz
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="R" data-listing-date-sort="1511586000000" data-listing-file-modified-sort="1675372688740" data-listing-reading-time-sort="24.21">
+<div class="quarto-post image-right" data-index="12" data-categories="text mining,facebook" data-listing-date-sort="1511586000000" data-listing-file-modified-sort="1675725342709" data-listing-reading-time-sort="24.21">
 <div class="thumbnail">
 <p><a href="./posts/2017-11-25-summary-analysis-of-my-facebook-existence/2017-11-25-summary-analysis-of-my-facebook-existence.html"> <img src="./posts/2017-11-25-summary-analysis-of-my-facebook-existence/img/moods.gif" class="thumnail-image"> </a></p>
 </div>
@@ -397,6 +661,16 @@ Plumbing the Depths of My Soul (in Facebook)
 <div class="listing-subtitle">
 
 </div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('text mining'); return false;">
+text mining
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('facebook'); return false;">
+facebook
+</div>
+</div>
+<a href="./posts/2017-11-25-summary-analysis-of-my-facebook-existence/2017-11-25-summary-analysis-of-my-facebook-existence.html">
 <div class="listing-description">
 First post! Let’s start out nice and easy. No big…
 </div>

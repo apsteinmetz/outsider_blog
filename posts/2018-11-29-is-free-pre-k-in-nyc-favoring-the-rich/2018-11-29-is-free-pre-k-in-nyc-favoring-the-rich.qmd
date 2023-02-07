@@ -2,10 +2,9 @@
 title: Is Free Pre-K in NYC Favoring the Rich?
 author: Art Steinmetz
 date: '2018-11-29'
+image: 'img/unnamed-chunk-23-1.png'
 slug: is-free-pre-k-in-nyc-favoring-the-rich
 categories:
-  - R
-tags:
   - web scraping
   - education
   - maps

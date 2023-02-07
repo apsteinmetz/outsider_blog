@@ -3,10 +3,9 @@ title: Rick and Morty Palettes
 author: Art Steinmetz
 date: '2019-02-04'
 slug: rick-and-morty-palettes
+image: 'img/rm2.jpg'
 categories:
-  - R
-tags:
-  - cluster
+  - clustering
   - rick and morty
   - palettes
 description: ''

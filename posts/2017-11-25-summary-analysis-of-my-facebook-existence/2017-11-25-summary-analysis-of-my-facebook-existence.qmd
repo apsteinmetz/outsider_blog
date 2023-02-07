@@ -4,8 +4,6 @@ author: Art Steinmetz
 date: '2017-11-25'
 slug: summary-analysis-of-my-facebook-existance
 categories:
-  - R
-tags:
   - text mining
   - facebook
 execute: 

@@ -1,15 +1,10 @@
 ---
-title: "outsider_blog"
+title: "Outsider Data Science"
 listing: 
   contents: posts
   sort: "date desc"
   type: default
+  categories: true
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
+Putting what's in there, out there. With ![](img/R_logo.svg.png)
