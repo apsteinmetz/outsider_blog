@@ -9,12 +9,21 @@ website:
         file: index.qmd
       - text: About
         file: about.qmd
+      - icon: linkedin
+        href: "https://www.linkedin.com/in/asteinmetz/"
+      - icon: twitter
+        href: "https://twitter.com/adababbage"
+      - icon: mastodon
+        href: "https://fosstodon.org/@adababbage"
+      - icon: github
+        href: "https://github.com/apsteinmetz"
+
 
 format:
   html:
     theme:
-      light: spacelab
       dark: darkly
+      light: cerulean
     css: styles.css
     toc: true
     code-block-bg: true
